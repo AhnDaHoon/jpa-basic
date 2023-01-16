@@ -20,8 +20,7 @@ public class ShopJpaMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
-            ShopOrder order = em.find(ShopOrder.class, 1L);
-            ShopMember member = order.getMember();
+
 
 
             tx.commit();

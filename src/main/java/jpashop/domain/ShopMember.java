@@ -1,9 +1,9 @@
 package jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class ShopMember {
@@ -15,6 +15,9 @@ public class ShopMember {
     private String city;
     private String street;
     private String zipcode;
+
+    @OneToMany(mappedBy = "member")
+    private List<ShopOrder> orders = new ArrayList<>();
 
     public Long getId() {
         return id;

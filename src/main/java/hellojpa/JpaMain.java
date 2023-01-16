@@ -16,6 +16,25 @@ public class JpaMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
+            // 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.changeTeam(team);
+            em.persist(member);
+
+//            em.flush();
+//            em.clear();
+
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> members = findTeam.getMembers();
+            for(Member m : members){
+                System.out.println("m.getUsername() = " + m.getUsername());
+            }
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
