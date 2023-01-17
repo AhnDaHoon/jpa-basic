@@ -1,7 +1,5 @@
 package jpashop.domain;
 
-import org.hibernate.criterion.Order;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
-public class ShopOrder {
+public class Order {
 
     @Id @GeneratedValue
     @Column(name = "ORDER_ID")
@@ -17,10 +15,14 @@ public class ShopOrder {
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
-    private ShopMember  member;
+    private Member member;
+
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
 
     @OneToMany(mappedBy = "order")
-    private List<ShopOrderItem> orderItems = new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate;
 
@@ -35,11 +37,11 @@ public class ShopOrder {
         this.id = id;
     }
 
-    public ShopMember getMember() {
+    public Member getMember() {
         return member;
     }
 
-    public void setMember(ShopMember member) {
+    public void setMember(Member member) {
         this.member = member;
     }
 

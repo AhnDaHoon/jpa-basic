@@ -1,12 +1,11 @@
 package jpashop.domain;
 
 import javax.persistence.*;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class ShopMember {
+public class Member {
 
     @Id @GeneratedValue()
     @Column(name = "MEMBER_ID")
@@ -17,7 +16,7 @@ public class ShopMember {
     private String zipcode;
 
     @OneToMany(mappedBy = "member")
-    private List<ShopOrder> orders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 
     public Long getId() {
         return id;

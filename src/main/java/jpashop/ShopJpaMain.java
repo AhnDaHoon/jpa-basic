@@ -1,8 +1,6 @@
 package jpashop;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import jpashop.domain.ShopMember;
-import jpashop.domain.ShopOrder;
+import jpashop.domain.Movie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,7 +18,13 @@ public class ShopJpaMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
+            Movie movie = new Movie();
+            movie.setDirector("A");
+            movie.setActor("b");
+            movie.setName("바");
+            movie.setPrice(10000);
 
+            em.persist(movie);
 
 
             tx.commit();
