@@ -3,8 +3,10 @@ package jpql;
 import jpashop.domain.Address;
 import jpashop.domain.AddressEntity;
 import jpashop.domain.Member;
+import jpashop.domain.Team;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class JpqlMain {
     public static void main(String[] args) {
@@ -16,15 +18,23 @@ public class JpqlMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
+            JpqlTeam team = new JpqlTeam();
+            team.setName("teamA");
+            em.persist(team);
+
             JpqlMember member = new JpqlMember();
             member.setUsername("member1");
             member.setAge(10);
+            member.setTeam(team);
+
             em.persist(member);
 
-            JpqlMember result = em.createQuery("select m from JpqlMember m where m.username = :username", JpqlMember.class)
-                    .setParameter("username", "member1")
-                    .getSingleResult();
-            System.out.println("singleResult = " + result.getUsername());
+            em.flush();
+            em.clear();
+
+            String query = "select m.username, 'HELLO', TRUE From JpqlMember m";
+            List<JpqlMember> result = em.createQuery(query, JpqlMember.class)
+                    .getResultList();
 
             tx.commit();
         }catch (Exception e){
@@ -33,7 +43,6 @@ public class JpqlMain {
         } finally {
             em.close();
         }
-        emf.close();
 
     }
 }

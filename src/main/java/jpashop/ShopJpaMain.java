@@ -42,7 +42,6 @@ public class ShopJpaMain {
         } finally {
             em.close();
         }
-        emf.close();
 
     }
 }
