@@ -6,6 +6,7 @@ import jpashop.domain.Member;
 import jpashop.domain.Team;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 public class JpqlMain {
@@ -32,10 +33,11 @@ public class JpqlMain {
             em.flush();
             em.clear();
 
-            String query = "select m.username, 'HELLO', TRUE From JpqlMember m";
-            List<JpqlMember> result = em.createQuery(query, JpqlMember.class)
+            String query = "select m.username From JpqlTeam t join t.members m";
+            List<Collection> result = em.createQuery(query, Collection.class)
                     .getResultList();
-
+            System.out.println("result = " + result);
+            
             tx.commit();
         }catch (Exception e){
             tx.rollback();

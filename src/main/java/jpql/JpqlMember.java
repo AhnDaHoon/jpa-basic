@@ -12,11 +12,11 @@ public class JpqlMember {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
-    private JpqlTeam team;
+    private JpqlTeam jpqlteam;
 
     public void changeTeam(JpqlTeam jpqlTeam){
-        this.team = jpqlTeam;
-        team.getMember().add(this);
+        this.jpqlteam = jpqlTeam;
+        jpqlteam.getMember().add(this);
     }
 
 
@@ -54,10 +54,10 @@ public class JpqlMember {
     }
 
     public JpqlTeam getTeam() {
-        return team;
+        return jpqlteam;
     }
 
     public void setTeam(JpqlTeam team) {
-        this.team = team;
+        this.jpqlteam = team;
     }
 }
